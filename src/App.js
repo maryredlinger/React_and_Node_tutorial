@@ -1,26 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+  state = {
+    gm_product_info: []
+  }
+  componentDidMount() {
+    fetch('http://localhost:4000/kurt_test')
+    .then(response => response.json())
+    .then(response => this.setState({ gm_product_info: response.data }))
+    .catch(err => console.error(err))
+  } 
+
+
+  renderProduct = <div key={this.state.gm_product_info.category_info_id}></div>
+
+  render() {
+    const { gm_product_info } = this.state;
+
+    return (
+      <div className="App">
+        <h1>hey world</h1>
+          {gm_product_info.map(gm_product_info => <div>{gm_product_info.product_name}</div>)}
+      </div>
+    );
+  }
 }
 
 export default App;
