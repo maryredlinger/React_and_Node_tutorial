@@ -1,5 +1,11 @@
 import React from 'react';
+import { BrowserRouter as Router, 
+          Switch,
+          Route
+} from 'react-router-dom';
+
 import Home from './pages/Home'
+import Parent from './pages/Parent'
 
 class App extends React.Component {
   constructor(){
@@ -21,7 +27,10 @@ class App extends React.Component {
     return (
       <div>
         <h1>Got Mary</h1>
-        <Home bs_search_detail_info={this.state.bs_search_detail_info} />
+        <Router>
+          <Route path="/" exact render={(props) =><Home bs_search_detail_info={this.state.bs_search_detail_info} />} />
+          <Route path="/:id" exact render={(props) =><Parent bs_search_detail_info={this.state.bs_search_detail_info} />} />
+        </Router>
       </div>
     );
   }
